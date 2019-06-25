@@ -10,6 +10,12 @@
  * for details.
  */
 
+ /**
+ * @typedef {Object} ParsedBarcode
+ * @property {string} codeName - Symbology identifier
+ * @property {ParsedElement[]} parsedCodeItems - an array with elements which are objects of type "ParsedElement"
+ */
+
 /**
  *
  * encapsulating the barcode parsing function in an anonymous, self-executing function
@@ -22,7 +28,7 @@ const parseBarcode = (function () {
      * GS1 - element. If it succeeds, the result is returned as an object composed of
      * an identifier and an array.It accepts
      * @param   {String}   barcode is the contents of the barcode you'd like to get parsed
-     * @returns {Array}    an array with elements which are objects of type "ParsedElement"
+     * @returns {ParsedBarcode}   with code name and an array with elements which are objects of type "ParsedElement"
      */
 
     function parseBarcode(barcode) {
