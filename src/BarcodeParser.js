@@ -14,7 +14,7 @@
  *
  * encapsulating the barcode parsing function in an anonymous, self-executing function
  */
-var parseBarcode = (function () {
+const parseBarcode = (function () {
     'use strict';
     /**
      * This is the main routine provided by the parseBarcode library. It takes a string,
@@ -30,7 +30,7 @@ var parseBarcode = (function () {
             fncChar = String.fromCharCode(29), // the ASCII "group separator"
             barcodelength = barcode.length,
             answer = {}, // the object to return
-            restOfBarcode = "", // the rest of the barcode, when first 
+            restOfBarcode = "", // the rest of the barcode, when first
             // elements are spliced away
             symbologyIdentifier = barcode.slice(0, 3),
             firstElement = {};
@@ -69,7 +69,7 @@ var parseBarcode = (function () {
                 this.data = "";
                 break;
             }
-            this.unit = ""; // some elements are accompaigned by an unit of 
+            this.unit = ""; // some elements are accompaigned by an unit of
             // measurement or currency
         }
 
@@ -89,7 +89,7 @@ var parseBarcode = (function () {
          *                   still unparsed rest of codestring.
          */
         function identifyAI(codestring) {
-            // find first identifier. AIs have a minimum length of 2 
+            // find first identifier. AIs have a minimum length of 2
             // digits, some have 3, some even 4.
             var firstNumber = codestring.slice(0, 1),
                 secondNumber = codestring.slice(1, 2),
@@ -113,7 +113,7 @@ var parseBarcode = (function () {
              * @returns {String} the cleaned string
              */
             function cleanCodestring(stringToClean) {
-                // 
+                //
                 var firstChar = stringToClean.slice(0, 1);
                 while (firstChar === fncChar) {
                     stringToClean = stringToClean.slice(1, stringToClean.length);
@@ -202,10 +202,10 @@ var parseBarcode = (function () {
 
                 if (dayAsNumber > 0) {
                     // Dates in Javascript are funny. Months start at 0. Days, on the other
-                    // hand, start at 1. We need to decrement the month by 1. Otherwise, 
-                    // the date will be wrong by one month. E.g., month 11 and day 15 
+                    // hand, start at 1. We need to decrement the month by 1. Otherwise,
+                    // the date will be wrong by one month. E.g., month 11 and day 15
                     // become Dec 15th. If the day is equal to 0, however, we use a Javascript
-                    // trick to turn the date into the last day of the previous month. 
+                    // trick to turn the date into the last day of the previous month.
                     // So, e.g., month 11 and day 0 become Nov 30th.
                     monthAsNumber--;
                 }
@@ -236,7 +236,7 @@ var parseBarcode = (function () {
              * @param {String} title its title, i.e. its short description
              */
             function parseVariableLength(ai, title) {
-                // 
+                //
                 elementToReturn = new ParsedElement(ai, title, "S");
                 var offSet = ai.length,
                     posOfFNC = codestring.indexOf(fncChar);
@@ -262,7 +262,7 @@ var parseBarcode = (function () {
              * @param {String} unit         often these elements have an implicit unit of measurement
              */
             function parseFixedLengthMeasure(ai_stem, fourthNumber, title, unit) {
-                // 
+                //
                 elementToReturn = new ParsedElement(ai_stem + fourthNumber, title, "N");
                 var offSet = ai_stem.length + 1,
                     numberOfDecimals = parseInt(fourthNumber, 10),
@@ -348,7 +348,7 @@ var parseBarcode = (function () {
              */
             function parseVariableLengthWithISOChars(ai_stem, title) {
                 // an element of variable length, representing a sequence of chars, followed by
-                // some ISO-code.          
+                // some ISO-code.
                 elementToReturn = new ParsedElement(ai_stem, title, "S");
                 var offSet = ai_stem.length,
                     posOfFNC = codestring.indexOf(fncChar),
@@ -418,7 +418,7 @@ var parseBarcode = (function () {
                     // Packaging Date (YYMMDD)
                     parseDate("13", "PACK DATE");
                     break;
-                    // AI "14" isn't defined      
+                    // AI "14" isn't defined
                 case "5":
                     // Best Before Date (YYMMDD)
                     parseDate("15", "BEST BEFORE or BEST BY");
@@ -449,7 +449,7 @@ var parseBarcode = (function () {
                     // Consumer product variant
                     parseVariableLength("22", "CPV");
                     break;
-                    // AI 23 is not defined  
+                    // AI 23 is not defined
                 case "4":
                     // from now, the third number matters:
                     thirdNumber = codestring.slice(2, 3);
@@ -475,7 +475,7 @@ var parseBarcode = (function () {
                     }
                     break;
                 case "5":
-                    // from now, the third number matters:	  
+                    // from now, the third number matters:
                     thirdNumber = codestring.slice(2, 3);
                     switch (thirdNumber) {
                     case "0":
@@ -503,7 +503,7 @@ var parseBarcode = (function () {
                         throw "04";
                     }
                     break;
-                    // AI "26" to "29" aren't defined      
+                    // AI "26" to "29" aren't defined
                 default:
                     throw "05";
                 }
@@ -603,7 +603,7 @@ var parseBarcode = (function () {
                     }
                     break;
                 case "3":
-                    // third and fourth numbers matter:      
+                    // third and fourth numbers matter:
                     thirdNumber = codestring.slice(2, 3);
                     fourthNumber = codestring.slice(3, 4);
 
@@ -695,7 +695,7 @@ var parseBarcode = (function () {
                     }
                     break;
                 case "5":
-                    // third and fourth numbers matter:  
+                    // third and fourth numbers matter:
                     thirdNumber = codestring.slice(2, 3);
                     fourthNumber = codestring.slice(3, 4);
 
@@ -792,7 +792,7 @@ var parseBarcode = (function () {
                     break;
                     // AI "38" isn't defined
                 case "9":
-                    // third and fourth numbers matter:	  
+                    // third and fourth numbers matter:
                     thirdNumber = codestring.slice(2, 3);
                     fourthNumber = codestring.slice(3, 4);
 
@@ -951,7 +951,7 @@ var parseBarcode = (function () {
                     case "3":
                         // Approval Number of Processor with ISO Country Code
 
-                        // Title and stem for parsing are build from 4th number:    
+                        // Title and stem for parsing are build from 4th number:
 
                         parseVariableLengthWithISOChars("703" + fourthNumber, "PROCESSOR # " + fourthNumber);
                         break;
@@ -1024,7 +1024,7 @@ var parseBarcode = (function () {
                             parseVariableLength("8007", "IBAN");
                             break;
                         case "8":
-                            // Date and Time of Production 
+                            // Date and Time of Production
                             parseVariableLength("8008", "PROD TIME"); // should be exactly 12 digits long
                             break;
                         default:
@@ -1087,7 +1087,7 @@ var parseBarcode = (function () {
                             break;
                         case "2":
                             // GS1-128 Coupon Extended Code
-                            parseVariableLength("8102", "-"); //should be 2 digits long          
+                            parseVariableLength("8102", "-"); //should be 2 digits long
                             break;
                         default:
                             throw "26";
@@ -1363,3 +1363,5 @@ var parseBarcode = (function () {
     }
     return parseBarcode;
 }());
+
+exports.parseBarcode = parseBarcode;
