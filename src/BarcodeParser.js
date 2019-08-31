@@ -34,12 +34,13 @@ const parseBarcode = (function () {
     function parseBarcode(barcode) {
         var i = 0, // counter
             fncChar = String.fromCharCode(29), // the ASCII "group separator"
-            barcode = barcode.replace(fncChar,''),
             barcodelength = barcode.length,
             answer = {}, // the object to return
             restOfBarcode = "", // the rest of the barcode, when first
             // elements are spliced away
-            symbologyIdentifier = barcode.slice(0, 3),
+            symbologyIdentifier = barcode
+              .replace(fncChar,'')
+              .slice(0, 3),
             firstElement = {};
 
         //auxilliary functions
@@ -1371,4 +1372,6 @@ const parseBarcode = (function () {
     return parseBarcode;
 }());
 
-exports.parseBarcode = parseBarcode;
+if (typeof exports === 'object') {
+    exports.parseBarcode = parseBarcode;
+}

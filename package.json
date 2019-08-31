@@ -1,6 +1,6 @@
 {
-  "name": "gs1-barcode-parser",
-  "version": "1.0.1",
+  "name": "gs1-barcode-parser-remedy",
+  "version": "1.0.2",
   "description": "The barcode parser is a library for handling the contents of GS1 barcodes.",
   "main": "src/BarcodeParser.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hprange/BarcodeParser.git"
+    "url": "git+https://github.com/MaximBelov/BarcodeParser.git"
   },
   "keywords": [
     "javascript",
@@ -18,7 +18,7 @@
   ],
   "author": "Peter Brockfeld",
   "license": "MIT",
-  "homepage": "https://github.com/hprange/BarcodeParser.git",
+  "homepage": "https://github.com/MaximBelov/BarcodeParser.git",
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-contrib-jasmine": "^2.0.2",
