@@ -189,7 +189,7 @@ const parseBarcode = (function () {
                 }
 
                 try {
-                    monthAsNumber = parseInt(dateYYMMDD.slice(2, 4), 10) - 1;
+                    monthAsNumber = parseInt(dateYYMMDD.slice(2, 4), 10);
                 } catch (e34) {
                     throw "34";
                 }
@@ -208,15 +208,15 @@ const parseBarcode = (function () {
                     yearAsNumber = yearAsNumber + 2000;
                 }
 
-                // if (dayAsNumber > 0) {
-                //     // Dates in Javascript are funny. Months start at 0. Days, on the other
-                //     // hand, start at 1. We need to decrement the month by 1. Otherwise,
-                //     // the date will be wrong by one month. E.g., month 11 and day 15
-                //     // become Dec 15th. If the day is equal to 0, however, we use a Javascript
-                //     // trick to turn the date into the last day of the previous month.
-                //     // So, e.g., month 11 and day 0 become Nov 30th.
-                //     monthAsNumber--;
-                // }
+                if (dayAsNumber > 0) {
+                    // Dates in Javascript are funny. Months start at 0. Days, on the other
+                    // hand, start at 1. We need to decrement the month by 1. Otherwise,
+                    // the date will be wrong by one month. E.g., month 11 and day 15
+                    // become Dec 15th. If the day is equal to 0, however, we use a Javascript
+                    // trick to turn the date into the last day of the previous month.
+                    // So, e.g., month 11 and day 0 become Nov 30th.
+                    monthAsNumber--;
+                }
 
                 elementToReturn.data.setFullYear(yearAsNumber, monthAsNumber, dayAsNumber);
                 codestringToReturn = codestring.slice(offSet + 6, codestringLength);
