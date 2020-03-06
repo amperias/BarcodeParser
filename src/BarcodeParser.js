@@ -220,6 +220,7 @@ const parseBarcode = (function () {
 
                 elementToReturn.data.setFullYear(yearAsNumber, monthAsNumber, dayAsNumber);
                 codestringToReturn = codestring.slice(offSet + 6, codestringLength);
+                elementToReturn.raw = codestring.slice(offSet, offSet+6);
             }
 
             /**
@@ -234,6 +235,7 @@ const parseBarcode = (function () {
                 var offSet = ai.length;
                 elementToReturn.data = codestring.slice(offSet, length + offSet);
                 codestringToReturn = codestring.slice(length + offSet, codestringLength);
+                elementToReturn.raw = codestring.slice(offSet, offSet + length);
             }
 
             /**
@@ -251,10 +253,12 @@ const parseBarcode = (function () {
 
                 if (posOfFNC === -1) { //we've got the last element of the barcode
                     elementToReturn.data = codestring.slice(offSet, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet);
                     codestringToReturn = "";
                 } else {
                     elementToReturn.data = codestring.slice(offSet, posOfFNC);
                     codestringToReturn = codestring.slice(posOfFNC + 1, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet, posOfFNC);
                 }
 
             }
@@ -280,6 +284,7 @@ const parseBarcode = (function () {
 
                 elementToReturn.unit = unit;
                 codestringToReturn = codestring.slice(offSet + 6, codestringLength);
+                elementToReturn.raw = codestring.slice(offSet, offSet + 6);
             }
 
             /**
@@ -302,10 +307,12 @@ const parseBarcode = (function () {
 
                 if (posOfFNC === -1) {
                     numberPart = codestring.slice(offSet, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet);
                     codestringToReturn = "";
                 } else {
                     numberPart = codestring.slice(offSet, posOfFNC);
                     codestringToReturn = codestring.slice(posOfFNC + 1, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet, posOfFNC);
                 }
                 // adjust decimals according to fourthNumber:
 
@@ -334,10 +341,12 @@ const parseBarcode = (function () {
 
                 if (posOfFNC === -1) {
                     isoPlusNumbers = codestring.slice(offSet, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet);
                     codestringToReturn = "";
                 } else {
                     isoPlusNumbers = codestring.slice(offSet, posOfFNC);
                     codestringToReturn = codestring.slice(posOfFNC + 1, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet, posOfFNC);
                 }
                 // cut off ISO-Code
                 numberPart = isoPlusNumbers.slice(3, isoPlusNumbers.length);
@@ -364,10 +373,12 @@ const parseBarcode = (function () {
 
                 if (posOfFNC === -1) {
                     isoPlusNumbers = codestring.slice(offSet, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet);
                     codestringToReturn = "";
                 } else {
                     isoPlusNumbers = codestring.slice(offSet, posOfFNC);
                     codestringToReturn = codestring.slice(posOfFNC + 1, codestringLength);
+                    elementToReturn.raw = codestring.slice(offSet, posOfFNC);
                 }
                 // cut off ISO-Code
                 elementToReturn.data = isoPlusNumbers.slice(3, isoPlusNumbers.length);
