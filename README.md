@@ -1,7 +1,8 @@
 # JavaScript GS1 barcode parser
 
 **IMPORTANT**: this is a fork of Peter Brockfeld's [original repository](https://github.com/PeterBrockfeld/BarcodeParser).
-**IMPORTANT**: [active fork](https://github.com/hprange/BarcodeParser).
+
+**IMPORTANT**: [active fork](https://github.com/MaximBelov/BarcodeParser).
 
 https://www.gs1.org/docs/barcodes/GS1_DataMatrix_Guideline.pdf
 
